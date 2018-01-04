@@ -118,12 +118,12 @@ public class Tentacle : MonoBehaviour {
                 nextDist = Vector3.Distance(points[points.Count - 1].position, target.position);
             }
             points[points.Count - 1].velocity += nextDir * points[points.Count - 1].weight;
+			//draw green arrow to mouse (drawRay=tegn linje)
             Debug.DrawRay(points[points.Count - 1].position, nextDir * points[points.Count - 1].weight, Color.green);
         }
-
+		//tegn cyan (nest ytterste del av tentakel)
         //air friction
         points[points.Count - 1].velocity *= 0.98f;
-
         //gravity
         points[points.Count - 1].velocity.y -= GRAVITY;
 
@@ -150,7 +150,7 @@ public class Tentacle : MonoBehaviour {
 
     void DrawVisuals()
     {
-        //Call this before assigning vertices to get better performance when continually updating the Mesh. 
+		//Call this before assigning vertices(points) to get better performance when continually updating the Mesh. 
         //Internally, this makes the Mesh use "dynamic buffers" in the underlying graphics API, which are more efficient when Mesh data changes often.
         mesh.MarkDynamic();
 
@@ -158,6 +158,7 @@ public class Tentacle : MonoBehaviour {
         Vector3 side;
         Vector3 side2;
 
+		//for = forEach   (for kvar gong i er mindre ein nPoints, i++
         //nPoints-2
         for (int i = 0; i < nPoints - 2; i++)
         {
@@ -224,10 +225,13 @@ public class Tentacle : MonoBehaviour {
         //Passing true in a markNoLogerReadable argument makes Mesh data not be readable from the script anymore, and frees up system memory copy of the data.
         mesh.UploadMeshData(false);
     }
+    
 
 
     void OnDrawGizmos()
     {
+
+		//draw points between lines
         if (points != null)
         {
             for (int i = points.Count - 1; i > 0; i--)
@@ -256,6 +260,7 @@ public class Tentacle : MonoBehaviour {
             }
         }
     }
+
 
 
 }
